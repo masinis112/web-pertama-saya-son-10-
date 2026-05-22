@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html class="client-js theme-dim skin-timeless" lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official Fisch Wiki</title>
+    
+    <style>
+        :root {
+            --bg-color: #0a192f; 
+            --text-color: #eaecf0;
+            --link-color: #7fb1ff;
+            --border-color: #1e3a5f;
+            --sidebar-width: 250px;
+            --sidebar-bg: #0d213f;
+            --card-bg: #112240;
+            --accent-color: #64ffda;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Lato, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        #mw-navigation {
+            width: var(--sidebar-width);
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            display: block;
+            text-decoration: none;
+        }
+
+        .nav-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-group h3 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #8892b0;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-group ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-group li {
+            margin-bottom: 0.4rem;
+        }
+
+        .nav-group a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .nav-group a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        /* Register Button Styling */
+        .reg-btn {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .reg-btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+        }
+
+        /* Content Area */
+        #content {
+            flex-grow: 1;
+            padding: 40px;
+            max-width: 1200px;
+            line-height: 1.6;
+        }
+
+        .firstHeading {
+            font-family: 'Linux Libertine','Georgia','Times',serif;
+            font-size: 2.5rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            color: #ccd6f6;
+        }
+
+        /* --- NEW: About Me Section Styling --- */
+        .about-section {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .about-image {
+            flex: 0 0 200px; /* Lebar tetap untuk gambar */
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%; /* Membuat gambar bulat */
+            border: 3px solid var(--accent-color);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+        /* ------------------------------------ */
+
+        /* Modal / Pop-up Form */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: 10% auto;
+            padding: 30px;
+            border: 1px solid var(--accent-color);
+            width: 350px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .modal-content h2 { color: var(--accent-color); margin-top: 0; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-size: 0.9rem; }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: white;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Info & Table Styling */
+        .infobox { float: right; width: 300px; background: var(--card-bg); border: 1px solid var(--border-color); padding: 15px; margin-left: 20px; border-radius: 4px; }
+        .infobox th { text-align: left; padding: 5px; background: #1e3a5f; }
+        .wikitable { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .wikitable th, .wikitable td { border: 1px solid var(--border-color); padding: 10px; }
+        .wikitable th { background-color: #172a45; }
+    </style>
+</head>
+<body>
+
+    <nav id="mw-navigation">
+        <a href="#" class="logo">Fisch Wiki</a>
+        
+        <div class="nav-group">
+            <h3>Account</h3>
+            <button class="reg-btn" id="openModal">Register Now</button>
+        </div>
+
+        <div class="nav-group">
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="#">Main page</a></li>
+                <li><a href="#">Recent changes</a></li>
+                <li><a href="#">Random page</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="content">
+        <h1 class="firstHeading">Fisch Wiki</h1>
+        
+        <!-- Header Image -->
+        <div style="background:#0a192f; border: 1px solid #1e3a5f; height:150px; display:flex; align-items:center; justify-content:center; border-radius: 4px; margin-bottom: 20px;">
+            <img src="https://staticg.sportskeeda.com/editor/2024/10/552c8-17295360682984-1920.jpg" alt="Fisch Image" style="max-height: 100%; width: auto; object-fit: contain;">
+        </div>
+
+        <!-- NEW: About Me Section -->
+        <section class="about-section">
+            <div class="about-image">
+                <!-- Ganti URL di bawah dengan foto Anda -->
+                <img src="faiz.png" alt="">
+            </div>
+            <div class="about-text">
+                <h2>About Me</h2>
+                <p>Halo! Saya adalah moderator di Fisch Wiki. Saya sangat sering bermain game simulasi memancing di Roblox dan berdedikasi untuk mendokumentasikan semua spesies ikan langka yang ada di game ini.</p>
+                <p>Hobi saya adalah mencari lokasi memancing tersembunyi dan menguji berbagai jenis Rod (tongkat pancing) untuk menemukan kombinasi terbaik.</p>
+            </div>
+        </section>
+
+        <table class="infobox">
+            <tr><th colspan="2" style="text-align:center; font-size:1.2rem; background: #233554;">Fisch (Roblox)</th></tr>
+            <tr><th>Developer</th><td>Wikitide Game Studios</td></tr>
+            <tr><th>Genre</th><td>Fishing Simulator</td></tr>
+        </table>
+
+        <p>Welcome to the <b>Official Fisch Wiki</b>. Explore rods, locations, and species.</p>
+
+        <h3>Common Fish Species</h3>
+        <table class="wikitable">
+            <thead>
+                <tr><th>Name</th><th>Rarity</th><th>Price</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Common Carp</td><td>Common</td><td>$15</td></tr>
+                <tr><td>Marlin</td><td>Rare</td><td>$450</td></tr>
+            </tbody>
+        </table>
+    </main>
+
+    <!-- Modal (Tetap sama) -->
+    <div id="regModal" class="modal">
+        <div class="modal-content">
+            <h2>Register</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="submit-btn">Create Account</button>
+                <button type="button" id="closeModal" style="background:none; border:none; color:#8892b0; cursor:pointer; width:100%; margin-top:10px;">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById("regModal");
+        const btn = document.getElementById("openModal");
+        const closeBtn = document.getElementById("closeModal");
+
+        btn.onclick = () => modal.style.display = "block";
+        closeBtn.onclick = () => modal.style.display = "none";
+        window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
+
+        document.getElementById('registerForm').onsubmit = (e) => {
+            e.preventDefault();
+            alert('Registration successful! (Demo)');
+            modal.style.display = "none";
+        };
+    </script>
+</body>
+</html>
